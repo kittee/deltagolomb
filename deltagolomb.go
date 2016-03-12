@@ -165,7 +165,9 @@ func (s *ExpGolombDecoder) Read(out []int) (int, error) {
 				s.zeros--
 				if s.zeros == 0 {
 					s.val -= 1 // Because we stole bit for 0.
-					s.state = READING_SIGN
+					s.state = COUNTING_ZEROS 
+					out[cpos] = s.val
+					cpos++
 				}
 			case READING_SIGN:
 				if bit == 1 {
